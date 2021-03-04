@@ -15,9 +15,10 @@ class TagController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Tag::class);
         $id = Auth::user();
         $data = Tag::get();
-        return view('tag.list',compact('data'));
+        return view('tag.list', compact('data'));
     }
 
     /**
@@ -27,6 +28,7 @@ class TagController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Tag::class);
         return view('tag.create');
     }
 
@@ -38,6 +40,7 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Tag::class);
         $tag = new Tag;
         $tag->name = $request->input('name');
         $tag->save();
@@ -63,6 +66,7 @@ class TagController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update', Tag::class);
         $data = Tag::find($id);
         return view('tag.edit', ['data' => $data]);
     }
@@ -76,6 +80,7 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('update', Tag::class);
         $data = Tag::find($id);
         $data->name = $request->input('name');
         $data->save();
@@ -90,6 +95,7 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', Tag::class);
         Tag::find($id)->delete();
         return redirect('tag');
     }

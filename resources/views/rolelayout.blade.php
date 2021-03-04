@@ -20,7 +20,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#">Blog</a>
+            <a class="navbar-brand" href="#">Twitter-Blog Role and Permissions</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -28,21 +28,12 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav d-flex">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span
+                        <a class="nav-link" href="{{route('role.index')}}">Manage Role <span
                                 class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('category.index')}}">Category</a>
+                        <a class="nav-link" href="{{route('users.index')}}">Manage User</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('tag.index')}}">Tag</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('post.index')}}">Post</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/role">Role</a>
-                    </li> 
                     <li class="nav-item logout">
                         <a class="nav-link ml-auto" href="/logout">Logout</a>
                     </li>
@@ -52,7 +43,7 @@
         </div>
 
     </nav>
-    <div class="container">
+<div class="container">
         @yield('content')
     </div>
     <footer></footer>

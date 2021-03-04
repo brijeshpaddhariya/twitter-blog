@@ -15,8 +15,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             return redirect('/layout');
-        }
-        else {
+        } else {
             return response()->json([
                 'message' => 'invalided username & password'
             ], 401);
@@ -30,7 +29,8 @@ class AuthController extends Controller
         $user->email = $request->input('email');
         $user->password = $request->input('password');
         $user->save();
-        return redirect('/login');
+        Auth::loginUsingId($user->id);
+        return redirect('/layout');
     }
 
     public function logout()

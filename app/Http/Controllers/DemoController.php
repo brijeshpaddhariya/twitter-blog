@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Post;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class DemoController extends Controller
 {

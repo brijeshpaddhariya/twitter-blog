@@ -16,10 +16,11 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
+        $this->authorize('viewAny', Post::class);
         $id = Auth::id();
-        $data = Post::where('user_id',$id)->get();
-        return view('post.list',compact('data'));
+        $data = Post::where('user_id', $id)->get();
+        return view('post.list', compact('data'));
     }
 
     /**
@@ -29,9 +30,10 @@ class PostController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Post::class);
         $data = Category::all();
         $tag = Tag::all();
-        return view('post.create',compact('data','tag'));
+        return view('post.create', compact('data', 'tag'));
     }
 
     /**
@@ -42,6 +44,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Post::class);
         $post = new Post;
         $user = Auth::id();
         $post->title = $request->input('title');
@@ -50,7 +53,7 @@ class PostController extends Controller
         $post->user_id = $user;
         $tag = $request->input('tag');
         $post->save();
-        $post->tags()->sync($tag);        
+        $post->tags()->sync($tag);
         return redirect('post');
     }
 
@@ -73,13 +76,14 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update', Post::class);
         $data = Post::find($id);
         $check = $data->tags;
         $tag = Tag::all();
         $category = Category::all();
 
-        
-        return view('post.edit',compact('data','category','tag','check'));
+
+        return view('post.edit', compact('data', 'category', 'tag', 'check'));
     }
 
     /**
@@ -91,6 +95,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('update', Post::class);
         $data = Post::find($id);
         $data->title = $request->input('title');
         $data->description = $request->input('description');
@@ -109,6 +114,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', Post::class);
         Post::find($id)->delete();
         return redirect('post');
     }

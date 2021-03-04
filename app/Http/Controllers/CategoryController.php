@@ -15,6 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Category::class);
         $id = Auth::id();
         $data = Category::get();
         return view('category.list', compact('data'));
@@ -27,6 +28,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Category::class);
         return view('category.create');
     }
 
@@ -38,6 +40,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Category::class);
         $category = new Category;
         $category->name = $request->input('name');
         $category->save();
@@ -63,8 +66,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update', Category::class);
         $data = Category::find($id);
-        return view('category.edit',['data'=>$data]);
+        return view('category.edit', ['data' => $data]);
     }
 
     /**
@@ -76,6 +80,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('update', Category::class);
         $data = Category::find($id);
         $data->name = $request->name;
         $data->save();
@@ -90,6 +95,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', Category::class);
         Category::find($id)->delete();
         return redirect('category');
     }

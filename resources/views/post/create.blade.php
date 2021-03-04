@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <h1>Post Categoery</h1>
+    <h1>Post Create</h1>
     <form action="{{ route('post.store') }}" method="POST">
         @csrf
         <div class="form-group">

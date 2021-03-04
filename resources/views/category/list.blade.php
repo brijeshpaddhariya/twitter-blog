@@ -2,9 +2,9 @@
 @section('content')
 <h1>Category List</h1>
 
-
-
+{{-- @role('user') --}}
 <a href="/category/create" class="btn btn-primary float-right">Category Create</a>
+{{-- @endrole --}}
 <table class="table">
     <thead>
         <tr>
